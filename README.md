@@ -1,1 +1,1 @@
-# dataverse-webhook-sample
+# Dataverse event propagation using Webhook
