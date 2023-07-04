@@ -26,9 +26,11 @@
 			"extensions":[
 				"ms-azuretools.vscode-azurefunctions",
 				"ms-azuretools.azure-dev",
+				"ms-azuretools.vscode-docker",
 				"vscjava.vscode-java-pack",
 				"vmware.vscode-boot-dev-pack",
-				"github.copilot"
+				"github.copilot",
+				"vscjava.vscode-gradle"
 			]
 		}
 	}
