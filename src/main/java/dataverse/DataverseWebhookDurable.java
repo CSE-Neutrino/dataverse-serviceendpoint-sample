@@ -4,7 +4,6 @@ import com.microsoft.azure.functions.annotation.*;
 import com.microsoft.azure.functions.*;
 
 import java.time.Duration;
-import java.time.Instant;
 import java.util.*;
 
 import com.microsoft.durabletask.*;
@@ -13,10 +12,15 @@ import com.microsoft.durabletask.azurefunctions.DurableClientContext;
 import com.microsoft.durabletask.azurefunctions.DurableClientInput;
 import com.microsoft.durabletask.azurefunctions.DurableOrchestrationTrigger;
 
+import dataverse.models.BBEvent;
+import dataverse.models.DataverseEvent;
+
 import com.azure.data.tables.TableClient;
+import com.azure.data.tables.TableClientBuilder;
 import com.azure.data.tables.TableServiceClient;
 import com.azure.data.tables.TableServiceClientBuilder;
 import com.azure.data.tables.models.TableEntity;
+import com.google.gson.Gson;
 
 /**
  * Please follow the below steps to run this durable function sample
@@ -35,20 +39,25 @@ public class DataverseWebhookDurable {
     /**
      * This HTTP-triggered function starts the orchestration.
      */
-    @FunctionName("AccountUpdated")
+    @FunctionName("DataverseEventHandler")
     public HttpResponseMessage startOrchestration(
-            @HttpTrigger(name = "req", methods = { HttpMethod.GET, HttpMethod.POST }, authLevel = AuthorizationLevel.ANONYMOUS) HttpRequestMessage<Optional<String>> request,
+            @HttpTrigger(name = "req", methods = { HttpMethod.GET,
+                    HttpMethod.POST }, authLevel = AuthorizationLevel.ANONYMOUS) HttpRequestMessage<Optional<String>> request,
             @DurableClientInput(name = "durableContext") DurableClientContext durableContext,
             final ExecutionContext context) {
 
         context.getLogger().info("AccountUpdated");
         DurableTaskClient client = durableContext.getClient();
 
+        Gson gson = new Gson();
+
         // create event object
-        DataverseEvent dataverseEvent = new DataverseEvent(DataverseEventType.AccountUpdated, request.getBody().orElse("[]"));
+        String jsonContent = request.getBody().orElse("{}");
+        DataverseEvent dataverseEvent = gson.fromJson(jsonContent, DataverseEvent.class);
+        BBEvent eventData = BBEvent.fromDataverseEvent(dataverseEvent, jsonContent);
 
         // Start the orchestration.
-        String instanceId = client.scheduleNewOrchestrationInstance("DataverseEventOrchestrator", dataverseEvent);
+        String instanceId = client.scheduleNewOrchestrationInstance("DataverseEventOrchestrator", eventData);
 
         // Return the instance id in the response.
         return durableContext.createCheckStatusResponse(request, instanceId);
@@ -60,25 +69,28 @@ public class DataverseWebhookDurable {
      * method is used to take the function input and execute the orchestrator logic.
      */
     @FunctionName("DataverseEventOrchestrator")
-    public String dataverseEventOrchestrator(@DurableOrchestrationTrigger(name = "taskOrchestrationContext") TaskOrchestrationContext ctx) {
+    public String dataverseEventOrchestrator(
+            @DurableOrchestrationTrigger(name = "taskOrchestrationContext") TaskOrchestrationContext ctx) {
 
-        DataverseEvent input = ctx.getInput(DataverseEvent.class);
+        BBEvent input = ctx.getInput(BBEvent.class);
         final int maxAttempts = 3;
         final Duration firstRetryInterval = Duration.ofSeconds(5);
         RetryPolicy policy = new RetryPolicy(maxAttempts, firstRetryInterval);
         TaskOptions taskOptions = new TaskOptions(policy);
         return ctx.callActivity("DataverseEventPersistor", input, taskOptions, String.class).await();
+
     }
 
     /**
      * This is the activity function that gets invoked by the orchestration.
      */
     @FunctionName("DataverseEventPersistor")
-    public String handleAccountUpdated(@DurableActivityTrigger(name = "dataverseEvent") DataverseEvent dataverseEvent,
+    public String handleAccountUpdated(@DurableActivityTrigger(name = "dataverseEvent") BBEvent eventData,
             final ExecutionContext context) {
 
         final String tableName = "DataverseEvents";
         String connectionString = System.getenv("AzureWebJobsStorage");
+        context.getLogger().info("DataverseEventPersistor:" + connectionString);
 
         // Create a TableServiceClient with a connection string.
         TableServiceClient tableServiceClient = new TableServiceClientBuilder()
@@ -86,14 +98,23 @@ public class DataverseWebhookDurable {
                 .buildClient();
 
         // Create the table if it not exists.
-        TableClient tableClient = tableServiceClient.createTableIfNotExists(tableName);
+        tableServiceClient.createTableIfNotExists(tableName);
+
+        // Create a TableClient with a connection string and a table name.
+        TableClient tableClient = new TableClientBuilder()
+                .connectionString(connectionString)
+                .tableName(tableName)
+                .buildClient();
 
         // Create a new employee TableEntity.
-        String partitionKey = dataverseEvent.getEventType().toString();
+        String partitionKey = eventData.EventType;
         String rowKey = UUID.randomUUID().toString();
         Map<String, Object> eventInfo = new HashMap<>();
-        eventInfo.put("EventPayload", dataverseEvent.getEventPayload());
-        eventInfo.put("Created", Instant.now().toString());
+        eventInfo.put("EntityName", eventData.EntityName);
+        eventInfo.put("EntityId", eventData.EntityId);
+        eventInfo.put("EventType", eventData.EventType);
+        eventInfo.put("Payload", eventData.Payload);
+        
         TableEntity eventRow = new TableEntity(partitionKey, rowKey).setProperties(eventInfo);
 
         // Upsert the entity into the table
