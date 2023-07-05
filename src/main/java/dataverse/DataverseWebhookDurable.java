@@ -69,10 +69,11 @@ public class DataverseWebhookDurable {
      * method is used to take the function input and execute the orchestrator logic.
      */
     @FunctionName("DataverseEventOrchestrator")
-    public String dataverseEventOrchestrator(
-            @DurableOrchestrationTrigger(name = "taskOrchestrationContext") TaskOrchestrationContext ctx) {
+    public String dataverseEventOrchestrator(@DurableOrchestrationTrigger(name = "taskOrchestrationContext") TaskOrchestrationContext ctx) {
 
         BBEvent input = ctx.getInput(BBEvent.class);
+        
+        // demo retry policy
         final int maxAttempts = 3;
         final Duration firstRetryInterval = Duration.ofSeconds(5);
         RetryPolicy policy = new RetryPolicy(maxAttempts, firstRetryInterval);
@@ -85,7 +86,7 @@ public class DataverseWebhookDurable {
      * This is the activity function that gets invoked by the orchestration.
      */
     @FunctionName("DataverseEventPersistor")
-    public String handleAccountUpdated(@DurableActivityTrigger(name = "dataverseEvent") BBEvent eventData,
+    public String dataverseEventPersistor(@DurableActivityTrigger(name = "dataverseEvent") BBEvent eventData,
             final ExecutionContext context) {
 
         final String tableName = "DataverseEvents";
@@ -107,7 +108,7 @@ public class DataverseWebhookDurable {
                 .buildClient();
 
         // Create a new employee TableEntity.
-        String partitionKey = eventData.EventType;
+        String partitionKey = eventData.EntityName;
         String rowKey = UUID.randomUUID().toString();
         Map<String, Object> eventInfo = new HashMap<>();
         eventInfo.put("EntityName", eventData.EntityName);
