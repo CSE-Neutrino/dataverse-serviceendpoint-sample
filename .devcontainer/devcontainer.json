@@ -10,6 +10,9 @@
 			"installMaven": "false",
 			"installGradle": "true"
 		},
+		"ghcr.io/devcontainers/features/dotnet": {
+			"version": "6"
+		},
 		"ghcr.io/devcontainers/features/azure-cli:1": {},
 		"ghcr.io/devcontainers/features/github-cli:1": {},
 		"ghcr.io/jlaundry/devcontainer-features/azure-functions-core-tools:1": {}
@@ -28,7 +31,8 @@
 				"ms-azuretools.azure-dev",
 				"vscjava.vscode-java-pack",
 				"vmware.vscode-boot-dev-pack",
-				"github.copilot"
+				"github.copilot",
+				"microsoft-IsvExpTools.powerplatform-vscode"
 			]
 		}
 	}
