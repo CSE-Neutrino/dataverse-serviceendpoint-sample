@@ -23,17 +23,8 @@ import com.azure.data.tables.models.TableEntity;
 import com.google.gson.Gson;
 
 /**
- * Please follow the below steps to run this durable function sample
- * 1. Send an HTTP GET/POST request to endpoint `StartHelloCities` to run a
- * durable function
- * 2. Send request to statusQueryGetUri in `StartHelloCities` response to get
- * the status of durable function
- * For more instructions, please refer https://aka.ms/durable-function-java
- * 
- * Please add com.microsoft:durabletask-azure-functions to your project
- * dependencies
- * Please add `"extensions": { "durableTask": { "hubName": "JavaTestHub" }}` to
- * your host.json
+ * Azure Functions with HTTP Trigger, to be used as a webhook endpoint for
+ * capturing Dataverse events.
  */
 public class DataverseWebhookDurable {
     /**
@@ -84,6 +75,7 @@ public class DataverseWebhookDurable {
 
     /**
      * This is the activity function that gets invoked by the orchestration.
+     * Save event data to azure table storage
      */
     @FunctionName("DataverseEventPersistor")
     public String dataverseEventPersistor(@DurableActivityTrigger(name = "dataverseEvent") BBEvent eventData,

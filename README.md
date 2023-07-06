@@ -31,7 +31,7 @@ This repository demonstrate how to capture Events from Dataverse world using pow
 - Deploy function to the newly created function App
 ![deploy to function app](assets/deploy-function-app.png)
 - Update storage account connection string Configuration > `AzureWebJobsStorage`
-![Update-storage-account-connection](assets/Update-sa-connection.png)
+![Update-storage-account-connection](assets/update-sa-connection.png)
 - Get `function url` and `Access Key` from Azure portal
 ![Get function Url and Access keys](assets/function-url.png)
 - Register new webhook to Microsoft dynamics environment using [Plugin registration tool](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/download-tools-nuget#download-and-launch-tools-using-power-platform-cli)
