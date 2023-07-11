@@ -5,7 +5,7 @@
   <PluginTypeId>fe4f0cdb-b254-4fa1-84f6-d58d0759b8b3</PluginTypeId>
   <PrimaryEntity>account</PrimaryEntity>
   <AsyncAutoDelete>1</AsyncAutoDelete>
-  <Description>JavaAzureFunction: Create of account</Description>
+  <Description>Custom-Webhook-java-az-function: Create of account</Description>
   <FilteringAttributes></FilteringAttributes>
   <InvocationSource>1</InvocationSource>
   <Mode>1</Mode>

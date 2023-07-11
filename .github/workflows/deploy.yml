@@ -14,20 +14,20 @@ name: build-deploy-solution
 on:
   push:
     branches:
-  inputs:
-      # Change this value
-      solution_name:
-        description: 'name of the solution to worked on from Power Platform'
-        required: true
-        default: RegisterServiceEndpointsSolution
-      solution_package_folder:
-        description: 'solution package destination folder'
-        required: true
-        default: deployment/packages/
-      solution_source_folder:
-        description: 'solution source folder'
-        required: true
-        default: deployment/solutions/
+    inputs:
+        # Change this value
+        solution_name:
+          description: 'name of the solution to worked on from Power Platform'
+          required: true
+          default: RegisterServiceEndpointsSolution
+        solution_package_folder:
+          description: 'solution package destination folder'
+          required: true
+          default: deployment/packages/
+        solution_source_folder:
+          description: 'solution source folder'
+          required: true
+          default: deployment/solutions/
   workflow_dispatch:
     inputs:
       # Change this value
