@@ -4,7 +4,7 @@
 # by a proper certificate authority and handled in a secure manner.
 
 # init vaiables
-solution_name="testsolution"
+solution_name="RegisterServiceEndpointsSolution"
 environment_name="dev"
 environment_url="https://neutrino.crm11.dynamics.com"
 
