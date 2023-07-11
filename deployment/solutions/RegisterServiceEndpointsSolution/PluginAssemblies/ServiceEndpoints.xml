@@ -9,6 +9,8 @@
     <IsCustomizable>1</IsCustomizable>
     <AuthType>4</AuthType>
     <AuthValue>NMuSVZwJ87gWTshigMzo7IpTb98677nNRTDVVKIC2Gw-AzFunj7eBg==</AuthValue>
+    <SASKeyName>code</SASKeyName>
+    <SASKey>NMuSVZwJ87gWTshigMzo7IpTb98677nNRTDVVKIC2Gw-AzFunj7eBg==</SASKey>
     <MessageFormat>2</MessageFormat>
     <NamespaceFormat>1</NamespaceFormat>
     <Url>https://dataversewebhookjava.azurewebsites.net/api/DataverseEventHandler</Url>
