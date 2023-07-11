@@ -13,7 +13,6 @@ name: build-deploy-solution
 
 on:
   push:
-    branches:
     inputs:
         # Change this value
         solution_name:
@@ -28,6 +27,7 @@ on:
           description: 'solution source folder'
           required: true
           default: deployment/solutions/
+          
   workflow_dispatch:
     inputs:
       # Change this value
