@@ -69,9 +69,10 @@ jobs:
 
   deploy-to-test:
     runs-on: ubuntu-latest # or you can runs-on: windows-latest
+    depends-on: deploy-to-dev
     env:
       RUNNER_DEBUG: 1
-    depends-on: deploy-to-dev
+    
     steps:
     - uses: actions/checkout@v2
       with:
