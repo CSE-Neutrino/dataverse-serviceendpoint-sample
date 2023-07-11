@@ -12,7 +12,6 @@ name: build-deploy-solution
 
 
 on:
-  workflow_dispatch:
   push:
     branches:
   inputs:
