@@ -32,7 +32,8 @@
 				"vmware.vscode-boot-dev-pack",
 				"github.copilot",
 				"vscjava.vscode-gradle",
-				"microsoft-IsvExpTools.powerplatform-vscode"
+				"microsoft-IsvExpTools.powerplatform-vscode",
+				"ms-vscode.makefile-tools"
 			]
 		}
 	}

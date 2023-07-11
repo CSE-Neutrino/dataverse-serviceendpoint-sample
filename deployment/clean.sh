@@ -4,7 +4,7 @@
 # by a proper certificate authority and handled in a secure manner.
 
 # init vaiables
-solution_name="testsolution"
+solution_name="RegisterServiceEndpointsSolution"
 
 # create environment settings
 pac solution delete --solution-name $solution_name
