@@ -32,7 +32,7 @@ on:
 
 jobs:
   deploy-to-dev:
-    runs-on: ubuntu-latest # or you can runs-on: windows-latest
+    runs-on: windows-latest
     env:
       RUNNER_DEBUG: 1
 
@@ -68,7 +68,7 @@ jobs:
         publish-changes: true
 
   deploy-to-test:
-    runs-on: ubuntu-latest # or you can runs-on: windows-latest
+    runs-on: windows-latest
     needs: deploy-to-dev
     env:
       RUNNER_DEBUG: 1
