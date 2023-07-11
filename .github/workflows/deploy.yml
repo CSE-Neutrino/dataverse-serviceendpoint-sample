@@ -12,38 +12,14 @@ name: build-deploy-solution
 
 
 on:
-  push:
-    inputs:
-      # Change this value
-      solution_name:
-        description: 'name of the solution to worked on from Power Platform'
-        required: true
-        default: RegisterServiceEndpointsSolution
-      solution_package_folder:
-        description: 'solution package destination folder'
-        required: true
-        default: deployment/packages/
-      solution_source_folder:
-        description: 'solution source folder'
-        required: true
-        default: deployment/solutions/
-    branches:
-      
   workflow_dispatch:
-    inputs:
-      # Change this value
-      solution_name:
-        description: 'name of the solution to worked on from Power Platform'
-        required: true
-        default: RegisterServiceEndpointsSolution
-      solution_package_folder:
-        description: 'solution package destination folder'
-        required: true
-        default: deployment/packages/
-      solution_source_folder:
-        description: 'solution source folder'
-        required: true
-        default: deployment/solutions/
+  push:
+    branches:
+
+env:
+  solution_name: RegisterServiceEndpointsSolution
+  solution_package_folder: deployment/packages/
+  solution_source_folder: deployment/solutions/
 
 jobs:
   deploy-to-dev:
@@ -67,8 +43,8 @@ jobs:
     - name: Pack solution
       uses: microsoft/powerplatform-actions/pack-solution@0.4.0
       with:
-        solution-folder: ${{ github.event.inputs.solution_source_folder}}/${{ github.event.inputs.solution_name }}
-        solution-file: ${{ github.event.inputs.solution_package_folder}}/${{ github.event.inputs.solution_name }}.zip
+        solution-folder: ${{ env.solution_source_folder}}/${{ env.solution_name }}
+        solution-file: ${{ env.solution_package_folder}}/${{ env.solution_name }}.zip
         solution-type: Managed
 
     - name: Import solution as Managed to build env
@@ -78,7 +54,7 @@ jobs:
         app-id: ${{secrets.SP_CLIENTID}}
         client-secret: ${{ secrets.SP_SECRET }}
         tenant-id: ${{secrets.SP_TENANTID}}
-        solution-file: ${{ github.event.inputs.solution_package_folder}}/${{ github.event.inputs.solution_name }}.zip
+        solution-file: ${{ env.solution_package_folder}}/${{ env.solution_name }}.zip
         force-overwrite: true
         publish-changes: true
 
@@ -104,8 +80,8 @@ jobs:
     - name: Pack solution
       uses: microsoft/powerplatform-actions/pack-solution@0.4.0
       with:
-        solution-folder: ${{ github.event.inputs.solution_source_folder}}/${{ github.event.inputs.solution_name }}
-        solution-file: ${{ github.event.inputs.solution_package_folder}}/${{ github.event.inputs.solution_name }}.zip
+        solution-folder: ${{ env.solution_source_folder}}/${{ env.solution_name }}
+        solution-file: ${{ env.solution_package_folder}}/${{ env.solution_name }}.zip
         solution-type: Managed
 
     - name: Import solution as Managed to build env
@@ -115,7 +91,7 @@ jobs:
         app-id: ${{secrets.SP_CLIENTID}}
         client-secret: ${{ secrets.SP_SECRET }}
         tenant-id: ${{secrets.SP_TENANTID}}
-        solution-file: ${{ github.event.inputs.solution_package_folder}}/${{ github.event.inputs.solution_name }}.zip
+        solution-file: ${{ env.solution_package_folder}}/${{ env.solution_name }}.zip
         force-overwrite: true
         publish-changes: true
 
@@ -126,21 +102,21 @@ jobs:
     #     app-id: ${{secrets.SP_CLIENTID}}
     #     client-secret: ${{ secrets.SP_SECRET }}
     #     tenant-id: ${{secrets.SP_TENANTID}}
-    #     solution-name: ${{ github.event.inputs.solution_name }}
-    #     solution-output-file: ${{ github.event.inputs.solution_exported_folder}}/${{ github.event.inputs.solution_name }}.zip
+    #     solution-name: ${{ env.solution_name }}
+    #     solution-output-file: ${{ env.solution_exported_folder}}/${{ env.solution_name }}.zip
 
     # - name: unpack-solution action
     #   uses: microsoft/powerplatform-actions/unpack-solution@0.4.0
     #   with:
-    #     solution-file: ${{ github.event.inputs.solution_exported_folder}}/${{ github.event.inputs.solution_name }}.zip
-    #     solution-folder: ${{ github.event.inputs.solution_folder}}/${{ github.event.inputs.solution_name }}
+    #     solution-file: ${{ env.solution_exported_folder}}/${{ env.solution_name }}.zip
+    #     solution-folder: ${{ env.solution_folder}}/${{ env.solution_name }}
     #     solution-type: 'Unmanaged'
     #     overwrite-files: true
 
     # - name: branch-solution, prepare it for a PullRequest
     #   uses: microsoft/powerplatform-actions/branch-solution@v0
     #   with:
-    #     solution-folder: ${{ github.event.inputs.solution_folder}}/${{ github.event.inputs.solution_name }}
-    #     solution-target-folder: ${{ github.event.inputs.solution_target_folder}}/${{ github.event.inputs.solution_name }}
+    #     solution-folder: ${{ env.solution_folder}}/${{ env.solution_name }}
+    #     solution-target-folder: ${{ env.solution_target_folder}}/${{ env.solution_name }}
     #     repo-token: ${{ secrets.GITHUB_TOKEN }}
     #     allow-empty-commit: true
