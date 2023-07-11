@@ -5,7 +5,7 @@
   <PluginTypeId>ef521e63-cd2b-4170-99f6-447466a7161e</PluginTypeId>
   <PrimaryEntity>account</PrimaryEntity>
   <AsyncAutoDelete>1</AsyncAutoDelete>
-  <Description>ServiceBus-az-queue: Update of account</Description>
+  <Description>Custom-ServiceBus-az-queue: Update of account</Description>
   <FilteringAttributes></FilteringAttributes>
   <InvocationSource>1</InvocationSource>
   <Mode>1</Mode>
@@ -17,14 +17,4 @@
   <IsHidden>0</IsHidden>
   <SupportedDeployment>0</SupportedDeployment>
   <IntroducedVersion>1.0</IntroducedVersion>
-  <SdkMessageProcessingStepImages>
-    <SdkMessageProcessingStepImage Name="AccountUpdate">
-      <SdkMessageProcessingStepImageId>{2be872f3-62a4-41da-88e7-77aff85000d9}</SdkMessageProcessingStepImageId>
-      <Attributes>accountid,name,accountnumber,address1_composite,address1_addresstypecode,address1_city,address1_country,address1_name,address1_primarycontactname</Attributes>
-      <EntityAlias>AccountUpdate</EntityAlias>
-      <ImageType>1</ImageType>
-      <MessagePropertyName>Target</MessagePropertyName>
-      <IsCustomizable>1</IsCustomizable>
-    </SdkMessageProcessingStepImage>
-  </SdkMessageProcessingStepImages>
 </SdkMessageProcessingStep>

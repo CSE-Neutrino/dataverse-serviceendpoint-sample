@@ -8,7 +8,6 @@ name: build-deploy-solution
 #   SP_CLIENTID           Service Principal App ID
 #   SP_TENANTID           Service Principal Azure AD tenant
 #   SP_SECRET             Service Principal secrtes
-#
 #   DevEnvironmentUrl     Url referencing the development environment
 
 

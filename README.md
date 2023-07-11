@@ -42,3 +42,9 @@ This repository demonstrate how to capture Events from Dataverse world using pow
 ![update-dataverse-table](assets/update-dataverse-table.png)
 - Check data has been created using data explorer on Storage Account > Tables > DataverseEvents
 ![storage-account-data](assets/storage-account-data.png)
+
+
+## Resources
+
+- [GitHub Actions for Microsoft Power Platform](https://learn.microsoft.com/en-us/power-platform/alm/devops-github-available-actions)
+- [Power Platform ALM using GitHub Actions](https://www.linkedin.com/pulse/power-platform-alm-using-github-actions-urs-r%C3%BCegg/)

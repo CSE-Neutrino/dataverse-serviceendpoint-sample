@@ -8,11 +8,11 @@ help: ## 💬 This help message :)
 
 deploy: ## 🔐 deploy 
 	@echo -e "----\e[34mStart $@\e[0m----" || true
-	@cd deployment && ./deploy.sh $(kv)
+	@cd deployment && ./deploy.sh $(solution_name)
 	@echo -e "----\e[34mCompleted\e[0m----"
 
 clean: ## 🔐 Generate the Certificates using openssl
 	@echo -e "----\e[34mStart $@\e[0m----" || true
-	@cd deployment && ./clean.sh
+	@cd deployment && ./clean.sh $(solution_name)
 	@echo -e "----\e[34mCompleted\e[0m----"
 

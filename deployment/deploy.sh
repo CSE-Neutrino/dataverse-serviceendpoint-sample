@@ -1,8 +1,17 @@
 #!/usr/bin/env bash
 # This scripts package and import the solution to the target environment.
 
+# Exit on errors
+set -e
+
+# Check for required parameters
+if [[ $1 == "" ]]; then
+    echo "Error missing required parameters: make deploy <solution_name>"
+    exit 1
+fi
+
 # init vaiables
-solution_name="RegisterServiceEndpointsSolution"
+solution_name="$1"
 
 # create solution package
 pac solution pack --zipfile solutions/$solution_name.zip --folder solutions/$solution_name --packagetype 'Managed'
