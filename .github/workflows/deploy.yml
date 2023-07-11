@@ -21,11 +21,11 @@ on:
         required: true
         default: RegisterServiceEndpointsSolution
       solution_package_folder:
-        description: 'folder name for staging the exported solution *do not change*'
+        description: 'folder name for staging the exported solution'
         required: true
         default: out/
       solution_source_folder:
-        description: 'staging the unpacked solution folder before check-in *do not change*'
+        description: 'solution source folder'
         required: true
         default: deployment/solutions/
 
@@ -60,9 +60,9 @@ jobs:
       uses: microsoft/powerplatform-actions/import-solution@0.4.0
       with:
         environment-url: ${{secrets.DevEnvironmentUrl}}
-        app-id: ${{secrets.ClientID}}
-        client-secret: ${{ secrets.PowerPlatformSPN }}
-        tenant-id: ${{secrets.TentantID}}
+        app-id: ${{secrets.SP_CLIENTID}}
+        client-secret: ${{ secrets.SP_SECRET }}
+        tenant-id: ${{secrets.SP_TENANTID}}
         solution-file: ${{ github.event.inputs.solution_package_folder}}/${{ github.event.inputs.solution_name }}.zip
         force-overwrite: true
         publish-changes: true
