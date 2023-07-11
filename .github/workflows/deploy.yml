@@ -21,9 +21,9 @@ on:
         required: true
         default: RegisterServiceEndpointsSolution
       solution_package_folder:
-        description: 'folder name for staging the exported solution'
+        description: 'solution package destination folder'
         required: true
-        default: out/
+        default: packages/
       solution_source_folder:
         description: 'solution source folder'
         required: true
