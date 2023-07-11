@@ -31,12 +31,47 @@ on:
         default: deployment/solutions/
 
 jobs:
-  export-from-dev:
-    runs-on: windows-latest
-    # or you can say runs-on: ubuntu-latest
+  deploy-to-dev:
+    runs-on: ubuntu-latest # or you can runs-on: windows-latest
     env:
       RUNNER_DEBUG: 1
 
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        lfs: true
+
+    - name: who-am-i action
+      uses: microsoft/powerplatform-actions/who-am-i@0.4.0
+      with:
+        environment-url: ${{secrets.DevEnvironmentUrl}}
+        app-id: ${{secrets.SP_CLIENTID}}
+        client-secret: ${{ secrets.SP_SECRET }}
+        tenant-id: ${{secrets.SP_TENANTID}}
+
+    - name: Pack solution
+      uses: microsoft/powerplatform-actions/pack-solution@0.4.0
+      with:
+        solution-folder: ${{ github.event.inputs.solution_source_folder}}/${{ github.event.inputs.solution_name }}
+        solution-file: ${{ github.event.inputs.solution_package_folder}}/${{ github.event.inputs.solution_name }}.zip
+        solution-type: Managed
+
+    - name: Import solution as Managed to build env
+      uses: microsoft/powerplatform-actions/import-solution@0.4.0
+      with:
+        environment-url: ${{secrets.DevEnvironmentUrl}}
+        app-id: ${{secrets.SP_CLIENTID}}
+        client-secret: ${{ secrets.SP_SECRET }}
+        tenant-id: ${{secrets.SP_TENANTID}}
+        solution-file: ${{ github.event.inputs.solution_package_folder}}/${{ github.event.inputs.solution_name }}.zip
+        force-overwrite: true
+        publish-changes: true
+
+  deploy-to-test:
+    runs-on: ubuntu-latest # or you can runs-on: windows-latest
+    env:
+      RUNNER_DEBUG: 1
+    depends-on: deploy-to-dev
     steps:
     - uses: actions/checkout@v2
       with:
