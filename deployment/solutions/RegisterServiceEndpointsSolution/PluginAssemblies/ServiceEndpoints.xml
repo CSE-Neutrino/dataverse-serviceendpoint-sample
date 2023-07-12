@@ -8,10 +8,10 @@
     <UserClaim>1</UserClaim>
     <IsCustomizable>1</IsCustomizable>
     <AuthType>4</AuthType>
-    <SASKeyName>code</SASKeyName>
+    <AuthValue><settings><setting name="Code" value="NMuSVZwJ87gWTshigMzo7IpTb98677nNRTDVVKIC2Gw-AzFunj7eBg==" /></settings></AuthValue>
     <MessageFormat>2</MessageFormat>
     <NamespaceFormat>1</NamespaceFormat>
-    <Url>https://dataversewebhookjava.azurewebsites.net/api/DataverseEventHandler?code=NMuSVZwJ87gWTshigMzo7IpTb98677nNRTDVVKIC2Gw-AzFunj7eBg==</Url>
+    <Url>https://dataversewebhookjava.azurewebsites.net/api/DataverseEventHandler</Url>
     <UseKeyVaultConfiguration>0</UseKeyVaultConfiguration>
   </ServiceEndpoint>
   <ServiceEndpoint ServiceEndpointId="{6ccc72c7-cc95-4c3a-87f8-df6cc307d4d0}" Name="Custom-ServiceBus-az-queue">
