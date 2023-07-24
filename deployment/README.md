@@ -6,7 +6,7 @@ The powerApps solution can be deployed to different enviroments using any of the
 - [Power Platform CLI](https://learn.microsoft.com/en-us/power-platform/developer/cli/reference/solution)
 - [Dataverse Web APIs](https://learn.microsoft.com/en-us/dynamics365/customerengagement/on-premises/developer/entities/solution?view=op-9-1)
 
-## Github Actions
+## Using Github Actions
 
 ```yml
 name: build-deploy-solution
@@ -68,3 +68,23 @@ jobs:
         publish-changes: true
 
 ```
+
+## Using Power Platform CLI
+
+```bash
+
+# init vaiables
+solution_name="$1"
+
+# create solution package
+pac solution pack --zipfile solutions/$solution_name.zip --folder solutions/$solution_name --packagetype 'Managed'
+
+# import soultion package to target environment
+pac solution import --path solutions/$solution_name.zip --force-overwrite
+
+# install solution to target environment
+pac solution publish --async false --max-async-wait-time 60
+
+```
+
+Note: Both deployment methods require manual configuration to be done after solution importing: setup security related config like webhook ApiKey or Servicebug plugin Connection String.
