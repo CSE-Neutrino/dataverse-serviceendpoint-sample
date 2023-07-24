@@ -49,3 +49,4 @@ This repository demonstrate how to capture Events from Dataverse world using pow
 - [GitHub Actions for Microsoft Power Platform](https://learn.microsoft.com/en-us/power-platform/alm/devops-github-available-actions)
 - [Power Platform ALM using GitHub Actions](https://www.linkedin.com/pulse/power-platform-alm-using-github-actions-urs-r%C3%BCegg/)
 - [Power Platform Solution concepts](https://learn.microsoft.com/en-us/power-platform/alm/solution-concepts-alm)
+
