@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SdkMessageProcessingStep Name="az-dataverse-queue az-dataverse-bus: Update of account" SdkMessageProcessingStepId="{eb5cf65a-0312-4c2d-935f-b1ce01be00ed}" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SdkMessageId>20bebb1b-ea3e-db11-86a7-000a3a5473e8</SdkMessageId>
+  <PluginTypeName>Microsoft.Crm.ServiceBus.ServiceBusPlugin, Microsoft.Crm.ServiceBus, Version=9.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35</PluginTypeName>
+  <PluginTypeId>ef521e63-cd2b-4170-99f6-447466a7161e</PluginTypeId>
+  <PrimaryEntity>account</PrimaryEntity>
+  <AsyncAutoDelete>1</AsyncAutoDelete>
+  <Description>Custom-ServiceBus-az-queue: Update of account</Description>
+  <FilteringAttributes></FilteringAttributes>
+  <InvocationSource>1</InvocationSource>
+  <Mode>1</Mode>
+  <Rank>1</Rank>
+  <EventHandler>{6ccc72c7-cc95-4c3a-87f8-df6cc307d4d0}</EventHandler>
+  <EventHandlerTypeCode>4618</EventHandlerTypeCode>
+  <Stage>40</Stage>
+  <IsCustomizable>1</IsCustomizable>
+  <IsHidden>0</IsHidden>
+  <SupportedDeployment>0</SupportedDeployment>
+  <IntroducedVersion>1.0</IntroducedVersion>
+</SdkMessageProcessingStep>
