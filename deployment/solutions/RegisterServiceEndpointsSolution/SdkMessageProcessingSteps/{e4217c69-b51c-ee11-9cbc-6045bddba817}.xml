@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SdkMessageProcessingStep Name="JavaAzureFunction: Create of account" SdkMessageProcessingStepId="{e4217c69-b51c-ee11-9cbc-6045bddba817}" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SdkMessageId>9ebdbb1b-ea3e-db11-86a7-000a3a5473e8</SdkMessageId>
+  <PluginTypeName>Microsoft.Crm.ServiceBus.WebhookPlugin, Microsoft.Crm.ServiceBus, Version=9.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35</PluginTypeName>
+  <PluginTypeId>fe4f0cdb-b254-4fa1-84f6-d58d0759b8b3</PluginTypeId>
+  <PrimaryEntity>account</PrimaryEntity>
+  <AsyncAutoDelete>1</AsyncAutoDelete>
+  <Description>Custom-Webhook-java-az-function: Create of account</Description>
+  <FilteringAttributes></FilteringAttributes>
+  <InvocationSource>1</InvocationSource>
+  <Mode>1</Mode>
+  <Rank>1</Rank>
+  <EventHandler>{9f40b73d-331b-ee11-9cbd-000d3a53fc2c}</EventHandler>
+  <EventHandlerTypeCode>4618</EventHandlerTypeCode>
+  <Stage>40</Stage>
+  <IsCustomizable>1</IsCustomizable>
+  <IsHidden>0</IsHidden>
+  <StateCode>0</StateCode>
+  <StatusCode>1</StatusCode>
+  <SupportedDeployment>0</SupportedDeployment>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <SdkMessageProcessingStepImages />
+</SdkMessageProcessingStep>
