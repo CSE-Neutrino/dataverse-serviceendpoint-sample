@@ -4,7 +4,7 @@ The powerApps solution can be deployed to different enviroments using any of the
 
 - [Github Actions](https://learn.microsoft.com/en-us/power-platform/alm/devops-github-actions)
 - [Power Platform CLI](https://learn.microsoft.com/en-us/power-platform/developer/cli/reference/solution)
-- [Dataverse Web APIs](https://learn.microsoft.com/en-us/dynamics365/customerengagement/on-premises/developer/entities/solution?view=op-9-1)
+- [Power platform Web APIs](https://learn.microsoft.com/en-us/dynamics365/customerengagement/on-premises/developer/entities/solution?view=op-9-1)
 
 ## Using Github Actions
 
@@ -88,3 +88,7 @@ pac solution publish --async false --max-async-wait-time 60
 ```
 
 Note: Both deployment methods require manual configuration to be done after solution importing: setup security related config like webhook ApiKey or Servicebug plugin Connection String.
+
+## Using Power platform Rest APIs
+
+*I need to do more investigation*
